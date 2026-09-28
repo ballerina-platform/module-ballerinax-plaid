@@ -5,10 +5,11 @@ This example pages through every transaction of a linked Item with `/transaction
 It demonstrates:
 
 1. Cursor pagination with `transactionsSync`: each call returns `next_cursor` and `has_more`, and the loop continues until `has_more` is `false`.
-2. Handling a `NOT_READY` update status, which Plaid returns while it is still extracting a newly linked Item's history.
-3. Optionally disconnecting the Item with `itemRemove` once the report is printed. Removal revokes the access token permanently, so it runs only when `removeItemAfterReport` is `true`.
+2. Applying each page's `added`, `modified` and `removed` lists to one set of transactions keyed by `transaction_id`, so the totals reflect the Item's current state.
+3. Handling the update status: `NOT_READY` stops the run, and anything short of `HISTORICAL_UPDATE_COMPLETE` marks the report as partial.
+4. Optionally disconnecting the Item with `itemRemove` once the report is printed. Removal revokes the access token permanently, so it runs only when `removeItemAfterReport` is `true`, and only after the historical update has completed.
 
-Pending transactions and inflows (negative amounts in Plaid's sign convention) are left out of the totals.
+Pending transactions and inflows (negative amounts in Plaid's sign convention) are left out of the totals. Totals are kept separately per currency, using `iso_currency_code` or, when that is absent, `unofficial_currency_code`.
 
 ## Prerequisites
 
@@ -28,7 +29,15 @@ Pending transactions and inflows (negative amounts in Plaid's sign convention) a
 
 ## Run the example
 
-Execute the following command to run the example:
+The example depends on the `ballerinax/plaid` version in this repository through the local repository. Pack the connector and push it there first:
+
+```bash
+cd ../../ballerina
+bal pack && bal push --repository=local
+cd ../examples/category_spending_summary
+```
+
+Then execute the following command to run the example:
 
 ```bash
 bal run

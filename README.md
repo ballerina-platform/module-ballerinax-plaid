@@ -12,7 +12,7 @@ The Plaid connector lets Ballerina applications call the Plaid API from Sandbox 
 
 ## Setup guide
 
-To use the Plaid connector, you need a Plaid account and its API keys. Every request is authenticated with a `client_id`, an environment-specific secret and the API version, which the connector sends as the `PLAID-CLIENT-ID`, `PLAID-SECRET` and `Plaid-Version` headers.
+To use the Plaid connector, you need a Plaid account and its API keys. With API-key authentication, which every operation supports, each request carries a `client_id`, an environment-specific secret and the API version, sent as the `PLAID-CLIENT-ID`, `PLAID-SECRET` and `Plaid-Version` headers. A client configured with OAuth instead sends a bearer token and none of these headers.
 
 ### Step 1: Create a Plaid account
 

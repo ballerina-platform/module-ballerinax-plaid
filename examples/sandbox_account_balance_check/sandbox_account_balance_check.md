@@ -25,7 +25,15 @@ It uses four operations in sequence:
 
 ## Run the example
 
-Execute the following command to run the example:
+The example depends on the `ballerinax/plaid` version in this repository through the local repository. Pack the connector and push it there first:
+
+```bash
+cd ../../ballerina
+bal pack && bal push --repository=local
+cd ../examples/sandbox_account_balance_check
+```
+
+Then execute the following command to run the example:
 
 ```bash
 bal run
