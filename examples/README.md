@@ -2,13 +2,21 @@
 
 The `ballerinax/plaid` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+| Example | Description |
+|---------|-------------|
+| [`sandbox_account_balance_check`](./sandbox_account_balance_check/sandbox_account_balance_check.md) | Link a Sandbox test institution, then list each account's real-time balance with its ACH numbers. |
+| [`category_spending_summary`](./category_spending_summary/category_spending_summary.md) | Page through an Item's transactions with `/transactions/sync` and total the outflows by spending category. |
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. Follow the [setup guide](https://github.com/ballerina-platform/module-ballerinax-plaid/tree/main/README.md#setup-guide) to obtain your Plaid `client_id` and secret.
+
+2. For each example, create a `Config.toml` file in the example directory with the values that example's document lists. Both need your API keys:
+
+    ```toml
+    clientId = "<Your Plaid client ID>"
+    secret = "<Your Plaid secret>"
+    ```
 
 ## Running an example
 
