@@ -9,7 +9,7 @@ This document records the sanitation done on top of the official OpenAPI specifi
 The OpenAPI specification is obtained from [wso2/api-specs](https://github.com/wso2/api-specs/blob/main/openapi/plaid/plaid/2020-09-14_1.740.1/openapi.yaml) (The Plaid API, `info.version` `2020-09-14_1.740.1`).
 These changes are done in order to improve the overall usability, and as workarounds for some known language limitations.
 
-Item 1 is applied to `docs/spec/openapi.json`. Items 2-8 are applied to `docs/spec/aligned_ballerina_openapi.json` after `bal openapi flatten` and `bal openapi align`; a regeneration that re-runs flatten and align from `openapi.json` must re-apply them. Operation-ID and schema-name decisions are persisted in `docs/spec/ai-mappings.json` and re-apply automatically.
+Items 1-7 are applied to `docs/spec/openapi.json`, so a regeneration that re-runs `bal openapi flatten` and `bal openapi align` from it reproduces them. The one exception is the `x-ballerina-name` of two API-key schemes in item 4, which `align` overwrites and which is therefore set again in `docs/spec/aligned_ballerina_openapi.json` after align. Operation-ID and schema-name decisions are persisted in `docs/spec/ai-mappings.json` and re-apply automatically.
 
 1. Check in the specification as JSON instead of YAML
 - **Original**: Plaid publishes the specification as YAML (`openapi.yaml`, 3,163,761 code points).
@@ -28,12 +28,12 @@ Item 1 is applied to `docs/spec/openapi.json`. Items 2-8 are applied to `docs/sp
 
 4. Name the API-key fields after the published connector
 - **Original**: `align` named the `clientId` and `secret` API-key schemes `pLAIDCLIENTID` and `pLAIDSECRET` (from the `PLAID-CLIENT-ID` and `PLAID-SECRET` header names).
-- **Updated**: `x-ballerina-name` is `plaidClientId`, `plaidSecret` and `plaidVersion` on the `clientId`, `secret` and `plaidVersion` security schemes, and each scheme has a description of the credential and its header.
+- **Updated**: Each of the `clientId`, `secret` and `plaidVersion` security schemes has a description of the credential and its header, applied to `docs/spec/openapi.json`. `x-ballerina-name` is `plaidClientId`, `plaidSecret` and `plaidVersion` in the aligned spec. `align` derives `plaidVersion` correctly, but it overwrites any `x-ballerina-name` set on the `clientId` and `secret` schemes in the original (back to `pLAIDCLIENTID` and `pLAIDSECRET`), so those two are set in `docs/spec/aligned_ballerina_openapi.json` after align and must be set again after a re-align.
 - **Reason**: These are the `ApiKeysConfig` field names of the published 1.x connector, and the aligned names are unreadable.
 
 5. Describe fields that have no description
 - **Original**: 1,053 schema properties had no description or one under 10 characters. 898 of them are `$ref` properties that `align` wraps as `allOf: [$ref]` with an `x-ballerina-name`, which leaves them without a description of their own.
-- **Updated**: Each `allOf: [$ref]` property takes the description of the schema it references (898); a multi-member `allOf` takes the description its non-reference member carries (7); arrays read `List of <items>` (73); the rest were written from the property and its parent schema (75), for example `PartnerEndCustomerAddress.city` → "The city of the end customer's address".
+- **Updated**: Each `allOf: [$ref]` property takes the description of the schema it references (898); a multi-member `allOf` takes the description its non-reference member carries (7); arrays read `List of <items>` (73); the rest were written from the property and its parent schema (75), for example `PartnerEndCustomerAddress.city` → "The city of the end customer's address". In `docs/spec/openapi.json` this is applied by wrapping each bare `$ref` property as `allOf: [$ref]` plus the description (879 wraps), and by filling or overwriting the description on the property.
 - **Reason**: Undescribed fields produce undocumented record fields in `types.bal`.
 
 6. Describe request bodies and typed responses

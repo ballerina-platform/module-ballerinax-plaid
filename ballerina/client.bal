@@ -6934,7 +6934,7 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Create a new end customer for a Plaid reseller (beta v1)
+    # Create a new end customer for a Plaid reseller (beta v1).
     #
     # + headers - Headers to be sent with the request 
     # + payload - Request to create a new end customer for a Plaid reseller 
@@ -6994,7 +6994,7 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Enable a Plaid reseller's end customer in Production (beta v1)
+    # Enable a Plaid reseller's end customer in Production (beta v1).
     #
     # + headers - Headers to be sent with the request 
     # + payload - Request to enable a Plaid reseller's end customer in the Production environment 

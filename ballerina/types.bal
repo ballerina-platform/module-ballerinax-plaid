@@ -6753,7 +6753,7 @@ public type CraCheckReportVerificationPdfGetRequest record {
     # Specifies which types of verification reports to include in the returned PDF. Supported combinations are: `[voa]`, `[employment_refresh]`, `[income]`, or `[voa, income]`. Other combinations are not supported
     @jsondata:Name {value: "reports_requested"}
     CraCheckReportVerificationPdfReportType[] reportsRequested?;
-    # Deprecated. Use `reports_requested` instead.
+    # Deprecated. Use `reports_requested` instead
     # 
     # # Deprecated
     @jsondata:Name {value: "report_requested"}
@@ -27470,13 +27470,13 @@ public type LinkTokenCreateRequestUser record {
     @jsondata:Name {value: "phone_number_verified_time"}
     @deprecated
     string? phoneNumberVerifiedTime?;
-    # The user's ID number. Used only for Identity Verification. If provided, the user will not be shown fields to enter their ID number in the Identity Verification flow. May be omitted, but if not omitted, all fields marked as required must be provided.
+    # The user's ID number. Used only for Identity Verification. If provided, the user will not be shown fields to enter their ID number in the Identity Verification flow. May be omitted, but if not omitted, all fields marked as required must be provided
     @jsondata:Name {value: "id_number"}
     UserIDNumber? idNumber?;
     # The user's email address. Can be used to prefill Link fields when used with [Identity Verification](https://plaid.com/docs/identity-verification)
     @jsondata:Name {value: "email_address"}
     string emailAddress?;
-    # The user's address. Used only for Identity Verification and the Identity Match in Link workflows. If provided for Identity Verification, the user will not be shown fields to enter their address in the Identity Verification flow. If provided for Identity Match, the provided data will be used to match against the user's address. May be omitted, but if not omitted, all fields marked as required must be provided.
+    # The user's address. Used only for Identity Verification and the Identity Match in Link workflows. If provided for Identity Verification, the user will not be shown fields to enter their address in the Identity Verification flow. If provided for Identity Match, the provided data will be used to match against the user's address. May be omitted, but if not omitted, all fields marked as required must be provided
     UserAddress? address?;
     # A unique ID representing the end user. Typically this will be a user ID number from your application. Personally identifiable information, such as an email address or phone number, should not be used in the `client_user_id`. It is currently used as a means of searching logs for the given user in the Plaid Dashboard
     @jsondata:Name {value: "client_user_id"}
@@ -27484,7 +27484,7 @@ public type LinkTokenCreateRequestUser record {
     # To be provided in the format "yyyy-mm-dd". Can be used to prefill Link fields when used with Identity Verification
     @jsondata:Name {value: "date_of_birth"}
     string? dateOfBirth?;
-    # The user's full name. Optional if using the [Identity Verification](https://plaid.com/docs/api/products/identity-verification) product; if not using Identity Verification, this field is not allowed. Users will not be asked for their name when this field is provided.
+    # The user's full name. Optional if using the [Identity Verification](https://plaid.com/docs/api/products/identity-verification) product; if not using Identity Verification, this field is not allowed. Users will not be asked for their name when this field is provided
     IdentityVerificationRequestUserName? name?;
     # The user's phone number in [E.164](https://en.wikipedia.org/wiki/E.164) format. If supplied, will be used when applicable to prefill phone number fields in Link for the [returning user flow](https://plaid.com/docs/link/returning-user) and the [Identity Verification flow](https://plaid.com/docs/identity-verification). Phone number input is validated against valid number ranges; number strings that do not match a real-world phone numbering scheme may cause the request to fail, even in the Sandbox test environment
     @jsondata:Name {value: "phone_number"}
@@ -27732,7 +27732,7 @@ public type SessionTokenCreateRequestUser record {
     # A unique ID representing the end user. Typically this will be a user ID number from your application. Personally identifiable information, such as an email address or phone number, should not be used in the `client_user_id`. It is currently used as a means of searching logs for the given user in the Plaid Dashboard
     @jsondata:Name {value: "client_user_id"}
     string clientUserId;
-    # The `user_id` created by calling `/user/create`. Provide this field only if you are using Plaid Check Report with Layer and have a `user_token`.
+    # The `user_id` created by calling `/user/create`. Provide this field only if you are using Plaid Check Report with Layer and have a `user_token`
     @jsondata:Name {value: "user_id"}
     UserId userId?;
 };
@@ -30745,7 +30745,7 @@ public type PaymentInitiationConsentPaymentExecuteRequest record {
     # Deprecated, payments will be executed within the type of the consent.
     # 
     # A scope of the payment. Must be one of the scopes mentioned in the consent.
-    # Optional if the appropriate consent has only one scope defined, required otherwise.
+    # Optional if the appropriate consent has only one scope defined, required otherwise
     # 
     # # Deprecated
     @deprecated
@@ -30947,7 +30947,7 @@ public type CraReportGetRequest record {
     # A unique user identifier, created by `/user/create`. Integrations that began using `/user/create` after December 10, 2025 use this field to identify a user instead of the `user_token`. For more details, see [New User APIs](https://plaid.com/docs/api/users/user-apis)
     @jsondata:Name {value: "user_id"}
     NewUserID userId;
-    # A unique ID identifying a CRA report. Like all Plaid identifiers, this ID is case sensitive. When provided, that specific report is returned; when omitted, the most recent report matching the request is returned.
+    # A unique ID identifying a CRA report. Like all Plaid identifiers, this ID is case sensitive. When provided, that specific report is returned; when omitted, the most recent report matching the request is returned
     @jsondata:Name {value: "report_id"}
     CraReportId reportId?;
     # Determines whose items are used. `PLAID_NETWORK` (default) uses the Plaid Network view of the user's profile. `CLIENT_USER` uses only the items linked by this client
